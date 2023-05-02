@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "azIDYF1mwAZwTRdFe5XHslnU/gi+gXd+VrIDmfwZ/kfQ9TPBb9tcusxB6KZGryQ0V8nmyk4jT/PXjGnlvc049g==",
+  "success": true,
+  "projectFilePath": "/home/nilish/Desktop/Power-apps/RichTextPCF/RichTextPCF1/RichTextPCF1.cdsproj",
+  "expectedPackageFiles": [
+    "/home/nilish/.nuget/packages/microsoft.netframework.referenceassemblies/1.0.0/microsoft.netframework.referenceassemblies.1.0.0.nupkg.sha512",
+    "/home/nilish/.nuget/packages/microsoft.netframework.referenceassemblies.net462/1.0.0/microsoft.netframework.referenceassemblies.net462.1.0.0.nupkg.sha512",
+    "/home/nilish/.nuget/packages/microsoft.powerapps.msbuild.pcf/1.22.4/microsoft.powerapps.msbuild.pcf.1.22.4.nupkg.sha512",
+    "/home/nilish/.nuget/packages/microsoft.powerapps.msbuild.solution/1.22.4/microsoft.powerapps.msbuild.solution.1.22.4.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,96 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/nilish/Desktop/Power-apps/RichTextPCF/RichTextPCF1/RichTextPCF1.cdsproj": {}
+  },
+  "projects": {
+    "/home/nilish/Desktop/Power-apps/RichTextPCF/RichTextPCF.pcfproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/nilish/Desktop/Power-apps/RichTextPCF/RichTextPCF.pcfproj",
+        "projectName": "RichTextPCF",
+        "projectPath": "/home/nilish/Desktop/Power-apps/RichTextPCF/RichTextPCF.pcfproj",
+        "packagesPath": "/home/nilish/.nuget/packages/",
+        "outputPath": "/home/nilish/Desktop/Power-apps/RichTextPCF/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/nilish/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net462"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net462": {
+            "targetAlias": "net462",
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net462": {
+          "targetAlias": "net462",
+          "dependencies": {
+            "Microsoft.NETFramework.ReferenceAssemblies": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
+            "Microsoft.PowerApps.MSBuild.Pcf": {
+              "target": "Package",
+              "version": "[1.*, )"
+            }
+          }
+        }
+      }
+    },
+    "/home/nilish/Desktop/Power-apps/RichTextPCF/RichTextPCF1/RichTextPCF1.cdsproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/nilish/Desktop/Power-apps/RichTextPCF/RichTextPCF1/RichTextPCF1.cdsproj",
+        "projectName": "RichTextPCF1",
+        "projectPath": "/home/nilish/Desktop/Power-apps/RichTextPCF/RichTextPCF1/RichTextPCF1.cdsproj",
+        "packagesPath": "/home/nilish/.nuget/packages/",
+        "outputPath": "/home/nilish/Desktop/Power-apps/RichTextPCF/RichTextPCF1/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/nilish/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net462"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net462": {
+            "targetAlias": "net462",
+            "projectReferences": {
+              "/home/nilish/Desktop/Power-apps/RichTextPCF/RichTextPCF.pcfproj": {
+                "projectPath": "/home/nilish/Desktop/Power-apps/RichTextPCF/RichTextPCF.pcfproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net462": {
+          "targetAlias": "net462",
+          "dependencies": {
+            "Microsoft.NETFramework.ReferenceAssemblies": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
+            "Microsoft.PowerApps.MSBuild.Solution": {
+              "target": "Package",
+              "version": "[1.*, )"
+            }
+          }
+        }
+      }
+    }
+  }
+}
