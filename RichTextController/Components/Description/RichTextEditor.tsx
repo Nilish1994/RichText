@@ -10,43 +10,26 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 // import "react-quill/dist/quill.bubble.css";
 
+import "../../css/RichTextController.css";
+
 // type FormatPainterProps = {
 //   quill: typeof Quill;
 // };
 
-const RichTextEditor = ({ quill }: any) => {
+const RichTextEditor = ({ quill }: any, props: any) => {
   const [value, setValue] = useState("");
   const quillRef = useRef<ReactQuill>(null);
 
-  useEffect(() => {
-    const handleContextMenu = (e: any) => {
-      e.preventDefault();
-    };
-    document.addEventListener("contextmenu", handleContextMenu);
-
-    return () => {
-      document.removeEventListener("contextmenu", handleContextMenu);
-    };
-  }, []);
-
-  // function handleDragOver(event: DragEvent) {
-  //   event.preventDefault();
-  // }
-
-  // function handleDrop(event: DragEvent) {
-  //   event.preventDefault();
-  // }
-
   // useEffect(() => {
-  //   const inputElement = document.getElementById(props.inputId);
-  //   inputElement?.addEventListener('drop', handleDrop);
-  //   inputElement?.addEventListener('dragover', handleDragOver);
+  //   const handleContextMenu = (e: any) => {
+  //     e.preventDefault();
+  //   };
+  //   document.addEventListener("contextmenu", handleContextMenu);
 
   //   return () => {
-  //     inputElement?.removeEventListener('drop', handleDrop);
-  //     inputElement?.removeEventListener('dragover', handleDragOver);
+  //     document.removeEventListener("contextmenu", handleContextMenu);
   //   };
-  // }, [props.inputId]);
+  // }, []);
 
   // const handleFormatPainter = () => {
   //   const quill = quillRef.current?.getEditor();
@@ -61,6 +44,24 @@ const RichTextEditor = ({ quill }: any) => {
   //     }
   //   }
   // };
+
+  // const handleBeforeInput = (event: any, info: any) => {
+  //   const selection = quillRef.current?.getEditor().getSelection();
+  //   if (selection) {
+  //     event.preventDefault();
+  //   }
+  // };
+
+  function dragOver(ev: any) {
+    ev.preventDefault();
+  }
+
+  function drop(ev: any) {
+    const droppedItem = ev.dataTransfer.getData("drag-item");
+    if (droppedItem) {
+      props.onItemDropped(droppedItem);
+    }
+  }
 
   const preventCopyPaste = (e: ClipboardEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -80,27 +81,26 @@ const RichTextEditor = ({ quill }: any) => {
       // ["link", "image", "video"],
       // ["clean"],
     ],
+    dragAndDrop: false,
+    clipboard: { matchVisual: false }
   };
 
   return (
     <>
-      <div>
-        Description
-        <div
-          draggable={true}
-          onCopy={(e: any) => preventCopyPaste(e)}
-          onPaste={(e: any) => preventCopyPaste(e)}
-          onCut={(e: any) => preventCopyPaste(e)}
-          onDragStart={(e: any) => preventCopyPaste(e)}
-          onDrop={(e: any) => preventCopyPaste(e)}
-          onDragOver={(e: any) => preventCopyPaste(e)}
-          onDragStartCapture={(e: any) => preventCopyPaste(e)}
-          className={"ql-container"}
-        >
-          <ReactQuill modules={modules} onChange={setValue} ref={quillRef} />
-        </div>
-        {/* <button onClick={handleFormatPainter}>Format Painter</button> */}
+      <div
+        onCopy={(e: any) => preventCopyPaste(e)}
+        onPaste={(e: any) => preventCopyPaste(e)}
+        onCut={(e: any) => preventCopyPaste(e)}
+        onDragOver={dragOver}
+        onDrop={drop}
+      >
+        <ReactQuill
+          modules={modules}
+          onChange={setValue}
+          ref={quillRef}
+        />
       </div>
+      {/* <button onClick={handleFormatPainter}>Format Painter</button> */}
     </>
   );
 };

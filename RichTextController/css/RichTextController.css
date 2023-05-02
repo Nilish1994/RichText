@@ -1,4 +1,3 @@
-.ql-container {
-    display: flex;
-    flex-direction: column-reverse; 
-  }
+.prevent-select {
+  user-select: none;
+}
