@@ -19,17 +19,36 @@ import "../../css/RichTextController.css";
 const RichTextEditor = ({ quill }: any, props: any) => {
   const [value, setValue] = useState("");
   const quillRef = useRef<ReactQuill>(null);
+  const divRef = useRef(null);
+
+  const preventSelection = (event: any) => {
+    if (!event.shiftKey) {
+      event.preventDefault();
+    }
+  }
+
 
   // useEffect(() => {
   //   const handleContextMenu = (e: any) => {
   //     e.preventDefault();
   //   };
   //   document.addEventListener("contextmenu", handleContextMenu);
+  //   document.addEventListener("selectstart", preventSelection);
 
   //   return () => {
   //     document.removeEventListener("contextmenu", handleContextMenu);
+  //     document.removeEventListener("selectstart", preventSelection);
   //   };
   // }, []);
+
+  useEffect(() => {
+    if (divRef.current) {
+      document.addEventListener("selectstart", preventSelection);
+    }
+    return () => {
+      document.removeEventListener("selectstart", preventSelection);
+    };
+  }, []);
 
   // const handleFormatPainter = () => {
   //   const quill = quillRef.current?.getEditor();
@@ -57,10 +76,11 @@ const RichTextEditor = ({ quill }: any, props: any) => {
   }
 
   function drop(ev: any) {
-    const droppedItem = ev.dataTransfer.getData("drag-item");
-    if (droppedItem) {
-      props.onItemDropped(droppedItem);
-    }
+    ev.preventDefault();
+    // const droppedItem = ev.dataTransfer.getData("drag-item");
+    // if (droppedItem) {
+    //   props.onItemDropped(droppedItem);
+    // }
   }
 
   const preventCopyPaste = (e: ClipboardEvent<HTMLInputElement>) => {
@@ -81,24 +101,21 @@ const RichTextEditor = ({ quill }: any, props: any) => {
       // ["link", "image", "video"],
       // ["clean"],
     ],
-    dragAndDrop: false,
-    clipboard: { matchVisual: false }
+    // dragAndDrop: false,
+    clipboard: { matchVisual: false },
   };
 
   return (
     <>
       <div
+        ref={divRef}
         onCopy={(e: any) => preventCopyPaste(e)}
         onPaste={(e: any) => preventCopyPaste(e)}
         onCut={(e: any) => preventCopyPaste(e)}
         onDragOver={dragOver}
         onDrop={drop}
       >
-        <ReactQuill
-          modules={modules}
-          onChange={setValue}
-          ref={quillRef}
-        />
+        <ReactQuill modules={modules} onChange={setValue} ref={quillRef} />
       </div>
       {/* <button onClick={handleFormatPainter}>Format Painter</button> */}
     </>
