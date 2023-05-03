@@ -1,5 +1,5 @@
 import * as React from "react";
-import RichTextEditor from "./Components/Description/RichTextEditor";
+import RichTextEditor from "./Components/RichTextEditor";
 
 const App = () => {
   return (

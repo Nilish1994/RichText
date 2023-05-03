@@ -7,7 +7,7 @@ import React, {
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-import "../../css/RichTextController.css";
+import "../css/RichTextController.css";
 
 const RichTextEditor = ({ quill }: any) => {
   const [value, setValue] = useState("");
