@@ -1,15 +1,25 @@
-/* .ql-toolbar {
+ /* .ql-toolbar {
   position: absolute;
   width: 100%;
   bottom: 0;
   text-align: left;
   z-index: 100;
-}
-
-.quill  {
-  position: relative;
 } */
+
+/* .quill  {
+  position: relative;
+}  */
 
 .ql-editor {
   min-height: 200px;
 } 
+
+.ql-picker-options {
+  z-index: 999;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+/* .ql-picker-label {
+
+} */

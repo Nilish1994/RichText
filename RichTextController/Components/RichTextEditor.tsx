@@ -6,6 +6,7 @@ import React, {
 } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { notification } from "antd";
 
 import "../css/RichTextController.css";
 
@@ -14,16 +15,16 @@ const RichTextEditor = ({ quill }: any) => {
   const quillRef = useRef<ReactQuill>(null);
   const divRef = useRef(null);
 
-  // useEffect(() => {
-  //   const handleContextMenu = (e: any) => {
-  //     e.preventDefault();
-  //   };
-  //   document.addEventListener("contextmenu", handleContextMenu);
+  useEffect(() => {
+    const handleContextMenu = (e: any) => {
+      e.preventDefault();
+    };
+    document.addEventListener("contextmenu", handleContextMenu);
 
-  //   return () => {
-  //     document.removeEventListener("contextmenu", handleContextMenu);
-  //   };
-  // }, []);
+    return () => {
+      document.removeEventListener("contextmenu", handleContextMenu);
+    };
+  }, []);
 
   function dragOver(ev: any) {
     ev.preventDefault();
@@ -39,7 +40,7 @@ const RichTextEditor = ({ quill }: any) => {
 
   const preventCopyPaste = (e: ClipboardEvent<HTMLInputElement>) => {
     e.preventDefault();
-    alert("Copying and pasting is not allowed!");
+    notification.error({ message: "Copying disabled" });
   };
 
   const modules = {
