@@ -3,12 +3,13 @@
   width: 100%;
   bottom: 0;
   text-align: left;
-} */
-
-/* .quill  {
-  position: relative;
+  z-index: 100;
 }
+
+.quill  {
+  position: relative;
+} */
 
 .ql-editor {
   min-height: 200px;
-} */
+} 

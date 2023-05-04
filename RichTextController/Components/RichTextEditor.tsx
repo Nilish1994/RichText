@@ -14,22 +14,26 @@ const RichTextEditor = ({ quill }: any) => {
   const quillRef = useRef<ReactQuill>(null);
   const divRef = useRef(null);
 
-  useEffect(() => {
-    const handleContextMenu = (e: any) => {
-      e.preventDefault();
-    };
-    document.addEventListener("contextmenu", handleContextMenu);
+  // useEffect(() => {
+  //   const handleContextMenu = (e: any) => {
+  //     e.preventDefault();
+  //   };
+  //   document.addEventListener("contextmenu", handleContextMenu);
 
-    return () => {
-      document.removeEventListener("contextmenu", handleContextMenu);
-    };
-  }, []);
+  //   return () => {
+  //     document.removeEventListener("contextmenu", handleContextMenu);
+  //   };
+  // }, []);
 
   function dragOver(ev: any) {
     ev.preventDefault();
   }
 
   function drop(ev: any) {
+    ev.preventDefault();
+  }
+
+  function dragStart(ev: any) {
     ev.preventDefault();
   }
 
@@ -54,10 +58,10 @@ const RichTextEditor = ({ quill }: any) => {
       <div
         ref={divRef}
         onCopy={(e: any) => preventCopyPaste(e)}
-        onPaste={(e: any) => preventCopyPaste(e)}
         onCut={(e: any) => preventCopyPaste(e)}
         onDragOver={dragOver}
         onDrop={drop}
+        onDragStart={dragStart}
       >
         <ReactQuill modules={modules} onChange={setValue} ref={quillRef} />
       </div>
