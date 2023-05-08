@@ -38,6 +38,14 @@ const RichTextEditor = ({ quill }: any) => {
     ev.preventDefault();
   }
 
+  // function onKeyDown(ev: any) {
+  //   if(ev.ctrlKey && ev.keyCode == 65)
+  //   console.log("test", ev.ctrlKey);
+  //   console.log("2222222222", ev.keyCode );
+  //   ev.preventDefault();
+  //   return false;
+  // }
+
   const preventCopyPaste = (e: ClipboardEvent<HTMLInputElement>) => {
     e.preventDefault();
     notification.error({ message: "Copying disabled" });
@@ -63,6 +71,7 @@ const RichTextEditor = ({ quill }: any) => {
         onDragOver={dragOver}
         onDrop={drop}
         onDragStart={dragStart}
+        // onKeyDown={onKeyDown}
       >
         <ReactQuill modules={modules} onChange={setValue} ref={quillRef} />
       </div>
