@@ -1,30 +1,47 @@
-import React, {
-  useState,
-  useEffect,
-  ClipboardEvent,
-  useRef,
-} from "react";
+import React, { useState, useEffect, ClipboardEvent, useRef } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { notification } from "antd";
+import { Button, notification } from "antd";
 
 import "../css/RichTextController.css";
 
 const RichTextEditor = ({ quill }: any) => {
   const [value, setValue] = useState("");
+  const [isDisabled, isSetDisabled] = useState(true);
   const quillRef = useRef<ReactQuill>(null);
   // const divRef = useRef(null);
 
-  // useEffect(() => {
-  //   const handleContextMenu = (e: any) => {
-  //     e.preventDefault();
-  //   };
-  //   document.addEventListener("contextmenu", handleContextMenu);
+  useEffect(() => {
+    const handleContextMenu = (e: any) => {
+      e.preventDefault();
+    };
+    document.addEventListener("contextmenu", handleContextMenu);
 
-  //   return () => {
-  //     document.removeEventListener("contextmenu", handleContextMenu);
-  //   };
-  // }, []);
+    return () => {
+      document.removeEventListener("contextmenu", handleContextMenu);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleSelectStart = (e: any) => {
+      e.preventDefault();
+    };
+    if (isDisabled) {
+      document.addEventListener("selectstart", handleSelectStart);
+
+      return () => {
+        document.removeEventListener("selectstart", handleSelectStart);
+      };
+    }
+  }, [isDisabled]);
+
+  // const preventTextSelection = () => {
+  //   if (isDisabled) {
+  //     document.addEventListener("selectstart", (e: any) => {
+  //       e.preventDefault();
+  //     });
+  //   }
+  // };
 
   function dragOver(ev: any) {
     ev.preventDefault();
@@ -45,11 +62,7 @@ const RichTextEditor = ({ quill }: any) => {
 
   const handleChange = (html: any) => {
     setValue(html);
-    console.log("========>", value);
-    
   };
-
-  
 
   const modules = {
     toolbar: [
@@ -62,15 +75,23 @@ const RichTextEditor = ({ quill }: any) => {
     clipboard: { matchVisual: false },
   };
 
+  const OnClickDisable = () => {
+    if (isDisabled) {
+      isSetDisabled(false);
+    } else {
+      isSetDisabled(true);
+    }
+  };
+
   const formats = [
-    'font',
-    'header',
-    'size',
-    'bold',
-    'italic',
-    'underline',
-    'list',
-    'bullet',
+    "font",
+    "header",
+    "size",
+    "bold",
+    "italic",
+    "underline",
+    "list",
+    "bullet",
   ];
 
   return (
@@ -82,20 +103,21 @@ const RichTextEditor = ({ quill }: any) => {
         onDragOver={dragOver}
         onDrop={drop}
         onDragStart={dragStart}
-        // onKeyDown={handleKeyDown}
       >
         {/* <ReactQuill modules={modules} onChange={setValue} ref={quillRef} /> */}
         <ReactQuill
-        ref={quillRef}
-        onChange={handleChange}
-        value={value}
-        modules={modules}
-        formats={formats}
-        onChangeSelection = {(r,v,s)=>{
-          console.log("R",r,v,s)
-        }}
-        bounds=".app"
-      />
+          ref={quillRef}
+          onChange={handleChange}
+          value={value}
+          modules={modules}
+          formats={formats}
+          onChangeSelection={(r, v, s) => {
+            console.log("R", r, v, s);
+          }}
+          bounds=".app"
+          readOnly={isDisabled}
+        />
+        <Button onClick={OnClickDisable}>Edit</Button>
       </div>
     </>
   );
