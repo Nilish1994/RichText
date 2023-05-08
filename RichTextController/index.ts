@@ -23,6 +23,12 @@ export class RichTextController
   }
 
   public updateView(context: ComponentFramework.Context<IInputs>): void {
+    document.onkeydown = function (ev: any) {
+      if (ev.ctrlKey && ev.keyCode == 65) {
+        ev.preventDefault();
+        return false;
+      }
+    };
     // Render the React component using ReactDOM.render
     ReactDOM.render(React.createElement(App), this.container);
   }

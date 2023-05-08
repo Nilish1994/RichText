@@ -13,18 +13,18 @@ import "../css/RichTextController.css";
 const RichTextEditor = ({ quill }: any) => {
   const [value, setValue] = useState("");
   const quillRef = useRef<ReactQuill>(null);
-  const divRef = useRef(null);
+  // const divRef = useRef(null);
 
-  useEffect(() => {
-    const handleContextMenu = (e: any) => {
-      e.preventDefault();
-    };
-    document.addEventListener("contextmenu", handleContextMenu);
+  // useEffect(() => {
+  //   const handleContextMenu = (e: any) => {
+  //     e.preventDefault();
+  //   };
+  //   document.addEventListener("contextmenu", handleContextMenu);
 
-    return () => {
-      document.removeEventListener("contextmenu", handleContextMenu);
-    };
-  }, []);
+  //   return () => {
+  //     document.removeEventListener("contextmenu", handleContextMenu);
+  //   };
+  // }, []);
 
   function dragOver(ev: any) {
     ev.preventDefault();
@@ -38,18 +38,18 @@ const RichTextEditor = ({ quill }: any) => {
     ev.preventDefault();
   }
 
-  // function onKeyDown(ev: any) {
-  //   if(ev.ctrlKey && ev.keyCode == 65)
-  //   console.log("test", ev.ctrlKey);
-  //   console.log("2222222222", ev.keyCode );
-  //   ev.preventDefault();
-  //   return false;
-  // }
-
   const preventCopyPaste = (e: ClipboardEvent<HTMLInputElement>) => {
     e.preventDefault();
     notification.error({ message: "Copying disabled" });
   };
+
+  const handleChange = (html: any) => {
+    setValue(html);
+    console.log("========>", value);
+    
+  };
+
+  
 
   const modules = {
     toolbar: [
@@ -62,18 +62,40 @@ const RichTextEditor = ({ quill }: any) => {
     clipboard: { matchVisual: false },
   };
 
+  const formats = [
+    'font',
+    'header',
+    'size',
+    'bold',
+    'italic',
+    'underline',
+    'list',
+    'bullet',
+  ];
+
   return (
     <>
       <div
-        ref={divRef}
+        // ref={divRef}
         onCopy={(e: any) => preventCopyPaste(e)}
         onCut={(e: any) => preventCopyPaste(e)}
         onDragOver={dragOver}
         onDrop={drop}
         onDragStart={dragStart}
-        // onKeyDown={onKeyDown}
+        // onKeyDown={handleKeyDown}
       >
-        <ReactQuill modules={modules} onChange={setValue} ref={quillRef} />
+        {/* <ReactQuill modules={modules} onChange={setValue} ref={quillRef} /> */}
+        <ReactQuill
+        ref={quillRef}
+        onChange={handleChange}
+        value={value}
+        modules={modules}
+        formats={formats}
+        onChangeSelection = {(r,v,s)=>{
+          console.log("R",r,v,s)
+        }}
+        bounds=".app"
+      />
       </div>
     </>
   );
