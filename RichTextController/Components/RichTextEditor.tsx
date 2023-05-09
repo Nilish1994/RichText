@@ -1,43 +1,55 @@
 import React, { useState, useEffect, ClipboardEvent, useRef } from "react";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { Button, notification } from "antd";
 
 import "../css/RichTextController.css";
 
 const RichTextEditor = ({ quill }: any) => {
   const [value, setValue] = useState("");
   const quillRef = useRef<ReactQuill>(null);
-  // const divRef = useRef(null);
 
-  // // Register the custom icons
+  // Register the custom icons
   // const icons = Quill.import("ui/icons");
-  // // const twitter = require("../Assets/vv.png");
   // icons['bold'] = '<img src={require("./custom-icon.png")} alt="Custom Icon" width="24" height="24" />'
 
-  // useEffect(() => {
-  //   document.onkeydown = function (event: any) {
-  //     const clipboardData = event.clipboardData;
-  //     if (clipboardData) {
-  //       const text = clipboardData.getData("text/plain");
-  //       // Process the clipboard text data
-  //       console.log("Clipboard text:", text);
-  //       // if (event.ctrlKey && event.keyCode == 65) {
-  //       //   event.preventDefault();
-  //       //   return false;
-  //       // }
-  //     }
-  //   };
+  useEffect(() => {
+    const handleContextMenu = (event: any) => {
+      event.preventDefault();
+    };
+    document.addEventListener("contextmenu", handleContextMenu);
 
-  //   const handleContextMenu = (e: any) => {
-  //     e.preventDefault();
-  //   };
-  //   document.addEventListener("contextmenu", handleContextMenu);
+    return () => {
+      document.removeEventListener("contextmenu", handleContextMenu);
+    };
+  }, []);
 
-  //   return () => {
-  //     document.removeEventListener("contextmenu", handleContextMenu);
-  //   };
-  // }, []);
+  useEffect(() => {
+    const handlePaste = async () => {
+      try {
+        const clipboardData = await navigator.clipboard.readText();
+        // Process the clipboard text data
+
+        const descriptionText = quillRef?.current?.editor?.getText();
+
+        if (descriptionText) {
+          if (clipboardData.includes(descriptionText)) {
+            await navigator.clipboard.writeText(
+              "Copying questions is not allowed on this webpage"
+            );
+          }
+        }
+      } catch (error) {
+        // Handle error
+        console.error("Failed to read clipboard data:", error);
+      }
+    };
+
+    document.addEventListener("copy", handlePaste);
+
+    return () => {
+      document.removeEventListener("copy", handlePaste);
+    };
+  }, []);
 
   function dragOver(ev: any) {
     ev.preventDefault();
@@ -51,9 +63,9 @@ const RichTextEditor = ({ quill }: any) => {
     ev.preventDefault();
   }
 
-  const preventCopyPaste = (e: ClipboardEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    notification.error({ message: "Copying disabled" });
+  const preventCopyPaste = (event: ClipboardEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    // notification.error({ message: "Copying disabled" });
   };
 
   const handleChange = (html: any) => {
@@ -74,13 +86,12 @@ const RichTextEditor = ({ quill }: any) => {
   return (
     <>
       <div
-        // ref={divRef}
+        className="exclude-copy"
         onCopy={(e: any) => preventCopyPaste(e)}
         onCut={(e: any) => preventCopyPaste(e)}
         onDragOver={dragOver}
         onDrop={drop}
         onDragStart={dragStart}
-        id={"rich_text_editor_element"}
       >
         <ReactQuill
           ref={quillRef}
@@ -88,6 +99,7 @@ const RichTextEditor = ({ quill }: any) => {
           value={value}
           modules={modules}
           bounds=".app"
+          id={"rich_text_editor_element"}
         />
       </div>
     </>

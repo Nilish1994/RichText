@@ -18,7 +18,6 @@ export class RichTextController
   ) {
     // Save the container element for later use
     this.container = container;
-
     // ...
   }
 
@@ -30,7 +29,6 @@ export class RichTextController
   //     console.log("Clipboard text:", text);
   //   }
   // };
-
 
   public updateView(context: ComponentFramework.Context<IInputs>): void {
     // Render the React component using ReactDOM.render
