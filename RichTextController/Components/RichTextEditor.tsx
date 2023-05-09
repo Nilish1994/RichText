@@ -15,29 +15,29 @@ const RichTextEditor = ({ quill }: any) => {
   // // const twitter = require("../Assets/vv.png");
   // icons['bold'] = '<img src={require("./custom-icon.png")} alt="Custom Icon" width="24" height="24" />'
 
-  useEffect(() => {
-    document.onkeydown = function (event: any) {
-      const clipboardData = event.clipboardData;
-      if (clipboardData) {
-        const text = clipboardData.getData("text/plain");
-        // Process the clipboard text data
-        console.log("Clipboard text:", text);
-        // if (event.ctrlKey && event.keyCode == 65) {
-        //   event.preventDefault();
-        //   return false;
-        // }
-      }
-    };
+  // useEffect(() => {
+  //   document.onkeydown = function (event: any) {
+  //     const clipboardData = event.clipboardData;
+  //     if (clipboardData) {
+  //       const text = clipboardData.getData("text/plain");
+  //       // Process the clipboard text data
+  //       console.log("Clipboard text:", text);
+  //       // if (event.ctrlKey && event.keyCode == 65) {
+  //       //   event.preventDefault();
+  //       //   return false;
+  //       // }
+  //     }
+  //   };
 
-    const handleContextMenu = (e: any) => {
-      e.preventDefault();
-    };
-    document.addEventListener("contextmenu", handleContextMenu);
+  //   const handleContextMenu = (e: any) => {
+  //     e.preventDefault();
+  //   };
+  //   document.addEventListener("contextmenu", handleContextMenu);
 
-    return () => {
-      document.removeEventListener("contextmenu", handleContextMenu);
-    };
-  }, []);
+  //   return () => {
+  //     document.removeEventListener("contextmenu", handleContextMenu);
+  //   };
+  // }, []);
 
   function dragOver(ev: any) {
     ev.preventDefault();
