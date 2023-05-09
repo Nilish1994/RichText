@@ -22,14 +22,14 @@ export class RichTextController
     // ...
   }
 
-  const handlePaste = (event: ClipboardEvent) => {
-    const clipboardData = event.clipboardData;
-    if (clipboardData) {
-      const text = clipboardData.getData("text/plain");
-      // Process the clipboard text data
-      console.log("Clipboard text:", text);
-    }
-  };
+  // const handlePaste = (event: ClipboardEvent) => {
+  //   const clipboardData = event.clipboardData;
+  //   if (clipboardData) {
+  //     const text = clipboardData.getData("text/plain");
+  //     // Process the clipboard text data
+  //     console.log("Clipboard text:", text);
+  //   }
+  // };
 
 
   public updateView(context: ComponentFramework.Context<IInputs>): void {
