@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ClipboardEvent, useRef } from "react";
-import ReactQuill from "react-quill";
+import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { Button, notification } from "antd";
 
@@ -7,41 +7,37 @@ import "../css/RichTextController.css";
 
 const RichTextEditor = ({ quill }: any) => {
   const [value, setValue] = useState("");
-  const [isDisabled, isSetDisabled] = useState(true);
   const quillRef = useRef<ReactQuill>(null);
   // const divRef = useRef(null);
 
-  // useEffect(() => {
-  //   const handleContextMenu = (e: any) => {
-  //     e.preventDefault();
-  //   };
-  //   document.addEventListener("contextmenu", handleContextMenu);
+  // // Register the custom icons
+  // const icons = Quill.import("ui/icons");
+  // // const twitter = require("../Assets/vv.png");
+  // icons['bold'] = '<img src={require("./custom-icon.png")} alt="Custom Icon" width="24" height="24" />'
 
-  //   return () => {
-  //     document.removeEventListener("contextmenu", handleContextMenu);
-  //   };
-  // }, []);
+  useEffect(() => {
+    document.onkeydown = function (event: any) {
+      const clipboardData = event.clipboardData;
+      if (clipboardData) {
+        const text = clipboardData.getData("text/plain");
+        // Process the clipboard text data
+        console.log("Clipboard text:", text);
+        // if (event.ctrlKey && event.keyCode == 65) {
+        //   event.preventDefault();
+        //   return false;
+        // }
+      }
+    };
 
-  // useEffect(() => {
-  //   const handleSelectStart = (e: any) => {
-  //     e.preventDefault();
-  //   };
-  //   if (isDisabled) {
-  //     document.addEventListener("selectstart", handleSelectStart);
+    const handleContextMenu = (e: any) => {
+      e.preventDefault();
+    };
+    document.addEventListener("contextmenu", handleContextMenu);
 
-  //     return () => {
-  //       document.removeEventListener("selectstart", handleSelectStart);
-  //     };
-  //   }
-  // }, [isDisabled]);
-
-  // const preventTextSelection = () => {
-  //   if (isDisabled) {
-  //     document.addEventListener("selectstart", (e: any) => {
-  //       e.preventDefault();
-  //     });
-  //   }
-  // };
+    return () => {
+      document.removeEventListener("contextmenu", handleContextMenu);
+    };
+  }, []);
 
   function dragOver(ev: any) {
     ev.preventDefault();
@@ -67,52 +63,13 @@ const RichTextEditor = ({ quill }: any) => {
   const modules = {
     toolbar: [
       [{ font: [] }],
-      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+      [{ size: [] }],
       ["bold", "italic", "underline"],
       [{ color: [] }, { background: [] }],
       [{ list: "ordered" }, { list: "bullet" }],
     ],
     clipboard: { matchVisual: false },
   };
-
-  // const OnClickDisable = () => {
-  //   if (isDisabled) {
-  //     isSetDisabled(false);
-  //   } else {
-  //     isSetDisabled(true);
-  //   }
-  // };
-
-  const preventTextSelection = () => {
-    document.addEventListener("contextmenu", handleSelectStart);
-  };
-
-  const handleSelectStart = (e: any) => {
-    e = e || window.event;
-    e.preventDefault();
-  };
-
-  // function onMouseOverCapture(ev: any) {
-  //   const handleSelectStart = (e: any) => {
-  //         e.preventDefault();
-  //       };
-  //         document.addEventListener("selectstart", handleSelectStart);
-
-  //         return () => {
-  //           document.removeEventListener("selectstart", handleSelectStart);
-  //         };
-  // }
-
-  const formats = [
-    "font",
-    "header",
-    "size",
-    "bold",
-    "italic",
-    "underline",
-    "list",
-    "bullet",
-  ];
 
   return (
     <>
@@ -123,22 +80,15 @@ const RichTextEditor = ({ quill }: any) => {
         onDragOver={dragOver}
         onDrop={drop}
         onDragStart={dragStart}
-        onMouseOverCapture={preventTextSelection}
+        id={"rich_text_editor_element"}
       >
-        {/* <ReactQuill modules={modules} onChange={setValue} ref={quillRef} /> */}
         <ReactQuill
           ref={quillRef}
           onChange={handleChange}
           value={value}
           modules={modules}
-          formats={formats}
-          onChangeSelection={(r, v, s) => {
-            console.log("R", r, v, s);
-          }}
           bounds=".app"
-          // readOnly={isDisabled}
         />
-        {/* <Button onClick={OnClickDisable}>Edit</Button> */}
       </div>
     </>
   );
