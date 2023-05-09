@@ -4,7 +4,7 @@ import "react-quill/dist/quill.snow.css";
 
 import "../css/RichTextController.css";
 
-const RichTextEditor = ({ quill }: any) => {
+const RichTextEditor = ({ quill, context }: any) => {
   const [value, setValue] = useState("");
   const quillRef = useRef<ReactQuill>(null);
 
@@ -28,7 +28,6 @@ const RichTextEditor = ({ quill }: any) => {
       try {
         const clipboardData = await navigator.clipboard.readText();
         // Process the clipboard text data
-
         const descriptionText = quillRef?.current?.editor?.getText();
 
         if (descriptionText) {
@@ -39,7 +38,6 @@ const RichTextEditor = ({ quill }: any) => {
           }
         }
       } catch (error) {
-        // Handle error
         console.error("Failed to read clipboard data:", error);
       }
     };
@@ -69,7 +67,14 @@ const RichTextEditor = ({ quill }: any) => {
   };
 
   const handleChange = (html: any) => {
+    console.log("html", html);
     setValue(html);
+    context.getAttribute("gyde_description").setValue(html);
+    console.log("CONTEXT =====>", context);
+    console.log(
+      "CONTEXT GET ATTRIBUTE =====>",
+      context.getAttribute("gyde_description")
+    );
   };
 
   const modules = {

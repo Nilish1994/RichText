@@ -682,3 +682,60 @@ Packing /home/nilish/Desktop/Power-apps/RichTextPCF/RichTextPCF1/obj/Release/Met
 2023-05-08 14:19:20.004 - Info	
 Unmanaged Pack complete.
 
+2023-05-09 23:38:59.481 - Info	
+Packing /home/nilish/Desktop/Power-apps/RichTextPCF/RichTextPCF1/obj/Release/Metadata to bin/Release/RichTextPCF1.zip
+
+2023-05-09 23:38:59.493 - Info	Processing Component: Entities
+2023-05-09 23:38:59.497 - Info	Processing Component: Roles
+2023-05-09 23:38:59.501 - Info	Processing Component: Workflows
+2023-05-09 23:38:59.501 - Info	Processing Component: FieldSecurityProfiles
+2023-05-09 23:38:59.502 - Info	Processing Component: Templates
+2023-05-09 23:38:59.502 - Info	Processing Component: EntityMaps
+2023-05-09 23:38:59.503 - Info	Processing Component: EntityRelationships
+2023-05-09 23:38:59.506 - Info	Processing Component: OrganizationSettings
+2023-05-09 23:38:59.507 - Info	Processing Component: optionsets
+2023-05-09 23:38:59.507 - Info	Processing Component: CustomControls
+2023-05-09 23:38:59.516 - Info	 - Seer365.DesignStudio.Controls.RichTextController
+2023-05-09 23:38:59.519 - Info	Processing Component: SolutionPluginAssemblies
+2023-05-09 23:38:59.520 - Info	Processing Component: EntityDataProviders
+2023-05-09 23:38:59.608 - Info	
+Unmanaged Pack complete.
+
+2023-05-09 23:52:01.279 - Info	
+Packing /home/nilish/Desktop/Power-apps/RichTextPCF/RichTextPCF1/obj/Release/Metadata to bin/Release/RichTextPCF1.zip
+
+2023-05-09 23:52:01.291 - Info	Processing Component: Entities
+2023-05-09 23:52:01.296 - Info	Processing Component: Roles
+2023-05-09 23:52:01.300 - Info	Processing Component: Workflows
+2023-05-09 23:52:01.301 - Info	Processing Component: FieldSecurityProfiles
+2023-05-09 23:52:01.301 - Info	Processing Component: Templates
+2023-05-09 23:52:01.302 - Info	Processing Component: EntityMaps
+2023-05-09 23:52:01.302 - Info	Processing Component: EntityRelationships
+2023-05-09 23:52:01.305 - Info	Processing Component: OrganizationSettings
+2023-05-09 23:52:01.305 - Info	Processing Component: optionsets
+2023-05-09 23:52:01.306 - Info	Processing Component: CustomControls
+2023-05-09 23:52:01.314 - Info	 - Seer365.DesignStudio.Controls.RichTextController
+2023-05-09 23:52:01.319 - Info	Processing Component: SolutionPluginAssemblies
+2023-05-09 23:52:01.320 - Info	Processing Component: EntityDataProviders
+2023-05-09 23:52:01.407 - Info	
+Unmanaged Pack complete.
+
+2023-05-10 00:05:04.747 - Info	
+Packing /home/nilish/Desktop/Power-apps/RichTextPCF/RichTextPCF1/obj/Release/Metadata to bin/Release/RichTextPCF1.zip
+
+2023-05-10 00:05:04.752 - Info	Processing Component: Entities
+2023-05-10 00:05:04.755 - Info	Processing Component: Roles
+2023-05-10 00:05:04.758 - Info	Processing Component: Workflows
+2023-05-10 00:05:04.759 - Info	Processing Component: FieldSecurityProfiles
+2023-05-10 00:05:04.759 - Info	Processing Component: Templates
+2023-05-10 00:05:04.760 - Info	Processing Component: EntityMaps
+2023-05-10 00:05:04.760 - Info	Processing Component: EntityRelationships
+2023-05-10 00:05:04.762 - Info	Processing Component: OrganizationSettings
+2023-05-10 00:05:04.762 - Info	Processing Component: optionsets
+2023-05-10 00:05:04.763 - Info	Processing Component: CustomControls
+2023-05-10 00:05:04.768 - Info	 - Seer365.DesignStudio.Controls.RichTextController
+2023-05-10 00:05:04.769 - Info	Processing Component: SolutionPluginAssemblies
+2023-05-10 00:05:04.770 - Info	Processing Component: EntityDataProviders
+2023-05-10 00:05:04.821 - Info	
+Unmanaged Pack complete.
+
