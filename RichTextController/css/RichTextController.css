@@ -24,7 +24,7 @@
 
 } */
 
-.ql-picker, .ql-picker:hover, .ql-picker:active, .ql-picker:focus {
+.ql-font, .ql-font:hover, .ql-font:active, .ql-font:focus, .ql-size, .ql-size:hover, .ql-size:active, .ql-size:focus {
   margin: 0px 6px 0px 0px;
     border: 1px solid rgb(225, 225, 225);
     cursor: default;
