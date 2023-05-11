@@ -9,16 +9,18 @@ declare global {
   }
 }
 
+declare const navigator: any;
+
 const RichTextEditor = ({ quill, context }: any) => {
   const [value, setValue] = useState("");
   const quillRef = useRef<ReactQuill>(null);
 
-  useEffect(() => {
-    // const content = window.parent.Xrm.Page.getAttribute("gyde_description").getValue();
-    // console.log('Content ====> ', content);
-    // setValue(content);
-    // console.log("ppy =====>", pp);
-  }, []);
+  // useEffect(() => {
+  //   const content = window.parent.Xrm.Page.getAttribute("gyde_description").getValue();
+  //   console.log('Content ====> ', content);
+  //   setValue(content);
+  //   // console.log("ppy =====>", pp);
+  // }, []);
 
   // Register the custom icons
   // const icons = Quill.import("ui/icons");
@@ -41,7 +43,8 @@ const RichTextEditor = ({ quill, context }: any) => {
       type  MyPermissionName = PermissionName | 'clipboard-read' | 'clipboard-write';
       try {
         const permision: MyPermissionName = "clipboard-read";
-
+        console.log('chrome ======> ', navigator.userAgent);
+        
         if (navigator.userAgent.includes("Safari/") && !(navigator.userAgent.includes("Chrome/") || navigator.userAgent.includes("Edge/"))) {
           event.preventDefault();
           await navigator.clipboard.writeText(
@@ -54,24 +57,59 @@ const RichTextEditor = ({ quill, context }: any) => {
           );
         } else if (navigator?.permissions) {          
           // const permissionName = "clipboard-read" as PermissionName;
-          const permissionStatus = await navigator.permissions.query({name: permision as PermissionName}); // allowWithoutGesture: false
-          if (permissionStatus.state === "granted") {
+          const permissionStatus = await navigator.permissions.query({name: permision as PermissionName, allowWithoutGesture: false}); // allowWithoutGesture: false
+          console.log('permissionStatus =================> ', permissionStatus);
+          
+          if (permissionStatus.state === "granted") { // || permissionStatus.state === "prompt"
             const clipboardData = await navigator.clipboard.readText();
+            console.log('clipboardData =====> ', clipboardData);
+            
             const descriptionText = quillRef?.current?.editor?.getText();
 
+            console.log("descriptionText ======> ", descriptionText);
+            
+
             if (descriptionText) {
+              console.log('condition ====> ', clipboardData.includes(descriptionText));
+              
               if (clipboardData.includes(descriptionText)) {
                 await navigator.clipboard.writeText(
                   "Copying questions is not allowed on this webpage"
                 );
               }
             }
-          } else {
+          } 
+          // else if (permissionStatus.state === "prompt" && navigator.permissions.request) {
+          //   const permissionResult = await navigator.permissions.request({
+          //     name: permision as PermissionName
+          //   });
+            
+          //   if (permissionResult.state === "granted") {
+          //     const clipboardData = await navigator.clipboard.readText();
+          //     console.log('clipboardData =====> ', clipboardData);
+              
+          //     const descriptionText = quillRef?.current?.editor?.getText();
+
+          //     console.log("descriptionText ======> ", descriptionText);
+              
+          //     if (descriptionText) {
+          //       console.log('condition ====> ', clipboardData.includes(descriptionText));
+                
+          //       if (clipboardData.includes(descriptionText)) {
+          //         await navigator.clipboard.writeText(
+          //           "Copying questions is not allowed on this webpage"
+          //         );
+          //       }
+          //     }
+          //   } else {
+          //     console.log("Clipboard read permission denied.");
+          //   }
+          // } 
+          else {
             await navigator.clipboard.writeText(
               "You need to grant permision to copy on this webpage"
             );
           }
-        
         } else {
           await navigator.clipboard.writeText(
             "Permissions API not supported"
@@ -112,7 +150,7 @@ const RichTextEditor = ({ quill, context }: any) => {
   const handleChange = (html: any) => {
     console.log("html", html);
     setValue(html);
-    // window.parent.Xrm.Page.getAttribute("gyde_description").setValue(html);
+    window.parent.Xrm.Page.getAttribute("gyde_description").setValue(html);
   };
 
   const modules = {
