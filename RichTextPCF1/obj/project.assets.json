@@ -809,19 +809,19 @@
     ]
   },
   "packageFolders": {
-    "/home/nilish/.nuget/packages/": {}
+    "/Users/user/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/nilish/Desktop/Power-apps/RichTextPCF/RichTextPCF1/RichTextPCF1.cdsproj",
+      "projectUniqueName": "/Users/user/Desktop/1BT/Works/NewClones/Seer/controllers/NilishGItProject/RichText/RichTextPCF1/RichTextPCF1.cdsproj",
       "projectName": "RichTextPCF1",
-      "projectPath": "/home/nilish/Desktop/Power-apps/RichTextPCF/RichTextPCF1/RichTextPCF1.cdsproj",
-      "packagesPath": "/home/nilish/.nuget/packages/",
-      "outputPath": "/home/nilish/Desktop/Power-apps/RichTextPCF/RichTextPCF1/obj/",
+      "projectPath": "/Users/user/Desktop/1BT/Works/NewClones/Seer/controllers/NilishGItProject/RichText/RichTextPCF1/RichTextPCF1.cdsproj",
+      "packagesPath": "/Users/user/.nuget/packages/",
+      "outputPath": "/Users/user/Desktop/1BT/Works/NewClones/Seer/controllers/NilishGItProject/RichText/RichTextPCF1/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/nilish/.nuget/NuGet/NuGet.Config"
+        "/Users/user/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net462"
@@ -833,8 +833,8 @@
         "net462": {
           "targetAlias": "net462",
           "projectReferences": {
-            "/home/nilish/Desktop/Power-apps/RichTextPCF/RichTextPCF.pcfproj": {
-              "projectPath": "/home/nilish/Desktop/Power-apps/RichTextPCF/RichTextPCF.pcfproj"
+            "/Users/user/Desktop/1BT/Works/NewClones/Seer/controllers/NilishGItProject/RichText/RichTextPCF.pcfproj": {
+              "projectPath": "/Users/user/Desktop/1BT/Works/NewClones/Seer/controllers/NilishGItProject/RichText/RichTextPCF.pcfproj"
             }
           }
         }

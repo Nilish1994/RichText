@@ -3,10 +3,22 @@ import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 import "../css/RichTextController.css";
+declare global {
+  interface Window {
+    Xrm: any;
+  }
+}
 
 const RichTextEditor = ({ quill, context }: any) => {
   const [value, setValue] = useState("");
   const quillRef = useRef<ReactQuill>(null);
+
+  useEffect(() => {
+    // const content = window.parent.Xrm.Page.getAttribute("gyde_description").getValue();
+    // console.log('Content ====> ', content);
+    // setValue(content);
+    // console.log("ppy =====>", pp);
+  }, []);
 
   // Register the custom icons
   // const icons = Quill.import("ui/icons");
@@ -24,21 +36,52 @@ const RichTextEditor = ({ quill, context }: any) => {
   }, []);
 
   useEffect(() => {
-    const handlePaste = async () => {
+    const handlePaste = async (event: any) => {
+      type PermissionName = "geolocation" | "notifications" | "persistent-storage" | "push" | "screen-wake-lock" | "xr-spatial-tracking";
+      type  MyPermissionName = PermissionName | 'clipboard-read' | 'clipboard-write';
       try {
-        const clipboardData = await navigator.clipboard.readText();
-        // Process the clipboard text data
-        const descriptionText = quillRef?.current?.editor?.getText();
+        const permision: MyPermissionName = "clipboard-read";
 
-        if (descriptionText) {
-          if (clipboardData.includes(descriptionText)) {
+        if (navigator.userAgent.includes("Safari/") && !(navigator.userAgent.includes("Chrome/") || navigator.userAgent.includes("Edge/"))) {
+          event.preventDefault();
+          await navigator.clipboard.writeText(
+            "Permissions API not supported"
+          );
+          await navigator.clipboard.writeText("");
+        } else if (navigator.userAgent.includes("Firefox/")) {
+          await navigator.clipboard.writeText(
+            "Permissions API not supported"
+          );
+        } else if (navigator?.permissions) {          
+          // const permissionName = "clipboard-read" as PermissionName;
+          const permissionStatus = await navigator.permissions.query({name: permision as PermissionName}); // allowWithoutGesture: false
+          if (permissionStatus.state === "granted") {
+            const clipboardData = await navigator.clipboard.readText();
+            const descriptionText = quillRef?.current?.editor?.getText();
+
+            if (descriptionText) {
+              if (clipboardData.includes(descriptionText)) {
+                await navigator.clipboard.writeText(
+                  "Copying questions is not allowed on this webpage"
+                );
+              }
+            }
+          } else {
             await navigator.clipboard.writeText(
-              "Copying questions is not allowed on this webpage"
+              "You need to grant permision to copy on this webpage"
             );
           }
+        
+        } else {
+          await navigator.clipboard.writeText(
+            "Permissions API not supported"
+          );
         }
       } catch (error) {
-        console.error("Failed to read clipboard data:", error);
+        console.error(error);
+          await navigator.clipboard.writeText(
+          "Copying questions is not allowed on this webpage"
+        );
       }
     };
 
@@ -69,12 +112,7 @@ const RichTextEditor = ({ quill, context }: any) => {
   const handleChange = (html: any) => {
     console.log("html", html);
     setValue(html);
-    context.getAttribute("gyde_description").setValue(html);
-    console.log("CONTEXT =====>", context);
-    console.log(
-      "CONTEXT GET ATTRIBUTE =====>",
-      context.getAttribute("gyde_description")
-    );
+    // window.parent.Xrm.Page.getAttribute("gyde_description").setValue(html);
   };
 
   const modules = {

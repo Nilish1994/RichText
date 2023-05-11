@@ -1,1 +1,2 @@
 /home/nilish/Desktop/Power-apps/RichTextPCF/RichTextPCF1/obj/Release/RichTextPCF1.cdsproj.CoreCompileInputs.cache
+/Users/user/Desktop/1BT/Works/NewClones/Seer/controllers/NilishGItProject/RichText/RichTextPCF1/obj/Release/RichTextPCF1.cdsproj.CoreCompileInputs.cache
