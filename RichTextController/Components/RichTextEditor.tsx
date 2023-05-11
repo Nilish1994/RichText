@@ -22,7 +22,7 @@ const RichTextEditor = ({ quill, context }: any) => {
 
   // Register the custom icons
   // const icons = Quill.import("ui/icons");
-  // icons['bold'] = '<img src={require("./custom-icon.png")} alt="Custom Icon" width="24" height="24" />'
+  // icons['bold'] = '<img src={require("../Assets/bold.png")} alt="Custom Icon" width="24" height="24" />'
 
   useEffect(() => {
     const handleContextMenu = (event: any) => {
